@@ -1,0 +1,131 @@
+#include<stdio.h>
+#define SIZE 10
+int queue[SIZE]={0};
+int front = -1;
+int rear = -1;
+
+void isEmpty();
+void isFull();
+void enQueue();
+void Front();
+void Rear();
+
+int main()
+{
+	int choice;
+	while(1)
+	{
+		puts("***** QUEUE MENU *****");
+		puts("1.isEmpty");
+		puts("2.isFull");
+		puts("3.enQueue");
+		puts("4.deQueue");
+		puts("5.Front");
+		puts("6.Rear");
+		puts("7.Display Queue");
+		puts("10.Exit");
+		
+		printf("Enter Your Choice = ");
+		scanf("%d",&choice);
+		
+		switch(choice)
+		{
+			case 1:
+					isEmpty();
+					break;
+			case 2:
+					isFull();
+					break;
+			case 3:
+					enQueue();
+					break;
+			case 4:
+					break;
+			case 5:
+					Front();
+					break;
+			case 6:
+					Rear();
+					break;
+			case 7:
+					break;
+			case 10:
+					return 0;
+			default:
+					printf("Invalid Choice\n");
+			
+		}
+	}
+	return 0;
+}
+
+void isEmpty()
+{
+	if(front==-1 && rear==-1)
+	{
+		printf("Queue is Empty\n");	
+	}
+	else
+	{
+		printf("Queue is Not Empty\n");	
+	}
+	return;	
+}
+void isFull()
+{
+	if(rear==SIZE-1)
+	{
+		printf("Queue is Full\n");	
+	}
+	else
+	{
+		printf("Queue is not Full\n");	
+	}
+	return;
+}
+void enQueue()
+{
+	int value;
+	
+	//Filter
+	if(rear==SIZE-1)
+	{
+		printf("Queue is Full..Can not enQueue\n");
+		return;
+	}
+	
+	printf("Enter Value = ");
+	scanf("%d",&value);
+	
+	if(front==-1) //Queue is Empty
+	{
+		front = 0;
+		rear = 0;
+	}
+	else
+	{
+		rear++;
+	}
+	queue[rear] = value;
+	return;
+}
+void Front()
+{
+	if(front==-1 && rear==-1)
+	{
+		printf("Queue is Empty\n");
+		return;
+	}
+	printf("Front element = %d\n",queue[front]);
+	return;
+}
+void Rear()
+{
+	if(front==-1 && rear==-1)
+	{
+		printf("Queue is Empty\n");
+		return;
+	}
+	printf("Rear element = %d\n",queue[rear]);
+	return;
+}

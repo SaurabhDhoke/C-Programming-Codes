@@ -1,0 +1,191 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define TRUE 1
+#define FALSE 0
+struct stack
+{
+	int data;
+	struct stack *next;
+};
+typedef struct stack STACK;
+typedef struct stack* PSTACK;
+typedef struct stack** PPSTACK;
+
+int isEmpty(PSTACK);
+void peek(PSTACK);
+void push(PPSTACK);
+int pop(PPSTACK);
+void display_H(PSTACK);
+void display_V(PSTACK);
+int main()
+{
+	PSTACK top = NULL;
+	int choice,ret;
+	
+	while(1)
+	{
+		puts("*****STACK MENU*****");
+		puts("1.isEmpty");
+		puts("2.Push");
+		puts("3.Pop");
+		puts("4.Peek");
+		puts("5.Display_V");
+		puts("6.Display_H");
+		puts("10.Exit");
+	
+		printf("Enter Choice = ");
+		scanf("%d",&choice);
+		
+		switch(choice)
+		{
+			case 1:
+				ret = isEmpty(top);
+				if(ret==TRUE)
+				{
+					printf("Stack is Empty\n");
+				}
+				else
+				{
+					printf("Stack is not Empty\n");
+				}
+				break;
+			case 2:
+				push(&top);
+				break;
+			case 3:
+				ret = pop(&top);
+				printf("%d value pop from stack\n",ret);
+				break;
+			case 4:
+				peek(top);
+				break;
+			case 5:
+				display_V(top);
+				break;
+			case 6:
+				display_H(top);
+				break;
+			case 10:
+				return 0;	
+		}
+	}
+	return 0;
+}
+int isEmpty(PSTACK top)
+{
+	if(top==NULL)
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+void push(PPSTACK top)
+{
+	PSTACK ptr=NULL;
+	int value = 0;
+	
+	ptr = (PSTACK)malloc(sizeof(STACK));
+	
+	if(ptr==NULL)
+	{
+		printf("Memory allocation failed\n");
+	}
+	
+	printf("Enter Value = ");
+	scanf("%d",&value);
+	
+	ptr->data = value;
+	ptr->next = NULL;
+	
+	if(*top==NULL)
+	{
+		*top = ptr;
+	}
+	else
+	{
+		ptr->next = *top;
+		*top = ptr;	
+	}
+	printf("Value inserted successfully\n");
+	
+	return;
+}
+
+void peek(PSTACK top)
+{
+	if(top==NULL)
+	{
+		printf("Stack is empty\n");
+	}
+	else
+	{
+		printf("Peek Element = %d\n",top->data);
+	}
+	return;
+}
+
+int pop(PPSTACK top)
+{
+	PSTACK temp = *top;
+	int value;
+	
+	if(*top == NULL)
+	{
+		printf("Stack is Empty, can not pop\n");
+		return 0;	
+	}	
+	else if(temp->next == NULL)
+	{
+		value = temp->data;
+		free(temp);
+		*top = NULL;
+	}
+	else
+	{
+		value = temp->data;
+		*top = (*top)->next;
+		free(temp);	
+	}
+	return value;
+}
+
+void display_H(PSTACK top)
+{
+	if(top==NULL)
+	{
+		printf("Stack is Empty\n");
+	}
+	else
+	{
+		while(top!=NULL)
+		{
+			printf("%d ",top->data);
+			top = top->next;
+		}
+		printf("\n");
+	}
+	return;
+}
+
+
+void display_V(PSTACK top)
+{
+	if(top==NULL)
+	{
+		printf("Stack is Empty\n");
+	}
+	else
+	{
+		while(top!=NULL)
+		{
+			printf("%d\n",top->data);
+			top = top->next;
+		}
+		printf("\n");
+	}
+	return;
+}

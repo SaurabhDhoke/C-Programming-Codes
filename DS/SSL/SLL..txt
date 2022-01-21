@@ -1,0 +1,113 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+struct node
+{
+	int data;
+	struct node* next;
+};
+
+void Insert_First();
+void Display();
+
+
+struct node* head = NULL;
+int main()
+{
+	int choice;
+	while(1)
+	{
+		puts("***Singly Linear Linked List***");
+		puts("1.Insert First");
+		puts("2.Insert Last");
+		puts("3.Insert Between");
+		puts("4.Delete First");
+		puts("5.Delete Last");
+		puts("6.Delete Between");
+		puts("7.Display");
+		puts("8.Count");
+		puts("9.Search");
+		puts("10.Exit");
+		
+		printf("Enter Your Choice = ");
+		scanf("%d",&choice);
+		
+		switch(choice)
+		{
+			case 1:
+					Insert_First();
+					break;
+			case 2:
+					break;
+			case 3:
+					break;
+			case 4:
+					break;
+			case 5:
+					break;
+			case 6:
+					break;
+			case 7:
+					Display();
+					break;
+			case 8:
+					break;
+			case 9:
+					break;
+			case 10:
+					return 0;
+		}
+	}
+	return 0;
+}
+
+void Insert_First()
+{
+	struct node* ptr = NULL;
+	int value = 0;
+	
+	ptr = (struct node*)malloc(sizeof(struct node));
+	
+	if(ptr==NULL)
+	{
+		printf("Memory allocation failed\n");
+		return;
+	}
+	
+	printf("Enter Value = ");
+	scanf("%d",&value);
+	
+	ptr->data = value;
+	ptr->next = NULL;
+	
+	if(head==NULL) //Linked list is Empty
+	{
+		head = ptr;
+	}
+	else
+	{
+		ptr->next = head;
+		head = ptr;
+	}
+	return;
+}
+
+void Display()
+{
+	struct node* temp = head;
+	if(head == NULL)//List is Empty
+	{
+		printf("List is Empty\n");
+	}
+	else  //List is not empty
+	{
+		while(temp!=NULL)
+		{
+			printf("%d->",temp->data);
+			temp = temp->next;	
+		}	
+	}
+	return;
+}
+
+

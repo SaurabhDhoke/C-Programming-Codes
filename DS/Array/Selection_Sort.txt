@@ -1,0 +1,58 @@
+#include<stdio.h>
+#define SIZE 5
+void Selection_Sort(int arr[],int num);
+int main()
+{
+	int num;
+	printf("Enter How many number you want = ");
+	scanf("%d",&num);
+	
+	if(num<1)
+	{
+		printf("Invalid Input\n");
+		return 0;
+	}
+	// Creation of array
+	int arr[num];
+	//Accept Values
+	for(int i=0;i<num;i++)
+	{
+		printf("Enter Value = ");
+		scanf("%d",&arr[i]);
+	}
+	//Display
+	printf("\nArray Before Sort = ");
+	for(int i=0;i<num;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+	//Function Call
+	Selection_Sort(arr,num);
+	
+	printf("\nArray After Sort = ");
+	for(int i=0;i<num;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+	return 0;
+}
+void Selection_Sort(int arr[],int num)
+{
+	int min = 0,temp = 0;
+	for(int i=0;i<num-1;i++)//Outer Loop for passes
+	{
+		min = i;
+		for(int j=i;j<num;j++)
+		{
+			if(arr[j]<arr[min])
+			{
+				min = j;
+			}
+		}
+		//Swapping 
+		temp = arr[min];
+		arr[min] = arr[i];
+		arr[i] = temp;
+	}
+	return;
+}

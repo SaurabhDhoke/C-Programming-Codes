@@ -1,0 +1,170 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+	int data;
+	struct node* next;
+};
+
+struct node* front = NULL;
+struct node* rear = NULL;
+
+void isEmpty()
+{
+	if(front==NULL)
+	{
+		printf("Queue is Empty\n");
+	}
+	else
+	{
+		printf("Queue is not Empty\n");
+	}
+	return;
+}
+void isFull();
+void enQueue()
+{
+	struct node* ptr = NULL;
+	int value = 0;
+	
+	ptr = (struct node*)malloc(sizeof(struct node));
+	
+	if(ptr==NULL)
+	{
+		printf("Memory not allocated\n");
+		return;
+	}
+	
+	printf("Enter Value = ");
+	scanf("%d",&value);
+	
+	ptr->data = value;
+	ptr->next = NULL;
+	
+	if(front==NULL)//Queue is Empty
+	{
+		front = ptr;
+		rear = ptr;
+	}
+	else
+	{
+		rear->next = ptr;
+		rear = ptr;
+	}
+	return;
+}
+	
+void deQueue()
+{
+	struct node* temp = front;
+	if(front==NULL)
+	{
+		printf("Queue is Empty..can not delete\n");
+		return;
+	}
+	else if(front==rear)
+	{
+		free(temp);
+		front=NULL;
+		rear = NULL;
+	}
+	else
+	{
+		front = front->next;
+		free(temp);
+	}
+	return;
+}
+void Front()
+{
+	if(front==NULL)
+	{
+		printf("Queue is Empty\n");
+	}
+	else
+	{
+		printf("Front element = %d",front->data);
+	}
+	return;
+}
+void Rear()
+{
+	if(front==NULL)
+	{
+		printf("Queue is Empty\n");
+	}
+	else
+	{
+		printf("Rear element = %d",rear->data);
+	}
+	return;
+}
+void Display()
+{
+	struct node* temp = front;
+	if(front==NULL)
+	{
+		printf("Queue is Empty\n");
+	}
+	else
+	{
+		while(temp!=NULL)
+		{
+			printf("%d ",temp->data);
+			temp = temp->next;
+		}
+	}
+	return;
+}
+
+int main()
+{
+	int choice;
+	while(1)
+	{
+		puts("***** QUEUE MENU *****");
+		puts("1.isEmpty");
+		puts("2.isFull");
+		puts("3.enQueue");
+		puts("4.deQueue");
+		puts("5.Front");
+		puts("6.Rear");
+		puts("7.Display Queue");
+		puts("10.Exit");
+		
+		printf("Enter Your Choice = ");
+		scanf("%d",&choice);
+		
+		switch(choice)
+		{
+			case 1:
+					isEmpty();
+					break;
+			case 2:
+				//	isFull();
+					break;
+			case 3:
+					enQueue();
+					break;
+			case 4:
+					deQueue();
+					break;
+			case 5:
+					Front();
+					break;
+			case 6:
+					Rear();
+					break;
+			case 7:
+					Display();
+					break;
+			case 10:
+					return 0;
+			default:
+					printf("Invalid Choice\n");
+			
+		}
+	}
+	return 0;
+}
